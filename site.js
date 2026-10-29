@@ -36,12 +36,15 @@
 
   /* ---------- fejléc: görgetésre halványít, lefelé elbújik ---------- */
   var hdr = document.getElementById('hdr'), dock = document.querySelector('.dock');
-  var lastY = 0, ticking = false;
+  var lastY = 0, ticking = false, builderSec = document.getElementById('osszerako');
+  // a tál-összerakóban mobilon a fejléc és a lebegő gomb félreáll, hogy a serpenyő és a gombok látsszanak
+  function inBuilder() { if (!builderSec || innerWidth > 900) return false; var r = builderSec.getBoundingClientRect(); return r.top < innerHeight * .5 && r.bottom > innerHeight * .5; }
   function onScroll() {
     var y = scrollY;
     hdr.classList.toggle('is-scrolled', y > 40);
-    hdr.classList.toggle('is-hidden', y > 500 && y > lastY && !menuOpen);
-    dock.classList.toggle('is-on', y > innerHeight * .7);
+    var inB = inBuilder();
+    hdr.classList.toggle('is-hidden', (inB || (y > 500 && y > lastY)) && !menuOpen);
+    dock.classList.toggle('is-on', y > innerHeight * .7 && !inB);
     lastY = y; ticking = false;
     if (!reduce) parallax(y);
   }

@@ -23,7 +23,7 @@ body {
   background: var(--bg); color: var(--ink);
   font-family: var(--f-body); font-size: clamp(17px, 1.05vw + 12px, 19px); line-height: 1.6;
   -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 .wrap { width: min(100% - 2 * var(--gut), var(--wrap)); margin-inline: auto; }
 .sec { padding-block: var(--sec); position: relative; }
@@ -286,7 +286,7 @@ p { margin: 0 0 1em; }
 .embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
 /* ---------- tál-összerakó ---------- */
-.builder { overflow: hidden; }
+.builder { overflow-x: clip; }
 .builder-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 6vw, 100px); align-items: center; }
 .pan-stage { position: sticky; top: 110px; align-self: start; justify-self: center; width: min(100%, 580px); margin-bottom: 30px; }
 .pan { transform: scale(var(--size)); transition: transform .9s cubic-bezier(.3, 1.35, .5, 1); transform-origin: 50% 46%; }
@@ -330,7 +330,11 @@ p { margin: 0 0 1em; }
 .builder-sum b { color: var(--sheet-acc-text, var(--acc-text)); }
 .builder-note { font-size: 14px; color: var(--sheet-muted); margin: 14px 0 0; }
 @media (max-width: 900px) {
-  .builder-grid { grid-template-columns: 1fr; }
-  .pan-stage { position: relative; top: auto; width: min(100%, 460px); }
+  .builder-grid { display: block; }
+  /* mobilon a serpenyő a képernyő tetejére tapad, a gombok alatta futnak — így látszik, ahogy beesnek a darabok */
+  .pan-stage { position: sticky; top: 0; z-index: 5; width: calc(100% + 2 * var(--gut)); margin: 0 calc(-1 * var(--gut)) 10px; padding: 14px 0 30px; background: linear-gradient(to bottom, var(--bg) calc(100% - 22px), rgba(22, 19, 15, 0)); }
+  .pan { width: min(60vw, 270px, 34svh); margin: 0 auto; }
+  .pan-label { position: relative; left: auto; top: auto; transform: none; width: max-content; margin: -36px auto 0; padding: 8px 18px; font-size: 15px; transition: none; }
+  .pan-label b { font-size: 26px; }
 }
 #builder-send[aria-disabled="true"] { opacity: .45; pointer-events: none; }
