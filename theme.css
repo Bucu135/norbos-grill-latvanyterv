@@ -1,0 +1,73 @@
+/* E · Öntöttvas-show (A + D) — A palettája, betűi és kerek tálai; D nyitóképe, futószalagja és képes helyszínei */
+[data-v="e"] {
+  --bg: #16130f; --ink: #f4ede1; --muted: #b9ad99; --line: rgba(244, 237, 225, .14);
+  --surface: #211c16; --acc: #e3aa3a; --acc-ink: #16130f; --acc-text: #ebbb5c;
+  --f-disp: 'Big Shoulders Display', 'Arial Narrow', sans-serif; --f-body: 'Figtree', system-ui, sans-serif;
+  --disp-w: 800; --disp-case: uppercase; --disp-lh: 1.14;
+  --hdr-fade: rgba(22, 19, 15, .85);
+}
+[data-v="e"] .hdr-logo .logo-gold { display: none; }
+[data-v="e"] .hdr-logo .logo-white { display: block; }
+
+/* nyitókép (D): teljes kép, oldalirányú sötétítés, szöveg balra lent */
+[data-v="e"] .hero { grid-template-columns: 1fr; align-content: end; padding: 120px var(--gut) 56px; }
+[data-v="e"] .hero-media { position: absolute; inset: 0; z-index: -1; }
+[data-v="e"] .hero-media img { object-position: 60% 50%; transform: scale(1.06); }
+[data-v="e"] .hero-media::after { content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(22, 19, 15, .95) 0%, rgba(22, 19, 15, .82) 32%, rgba(22, 19, 15, .25) 66%, rgba(22, 19, 15, .1) 100%),
+              linear-gradient(0deg, rgba(22, 19, 15, .9), rgba(22, 19, 15, 0) 40%); }
+[data-v="e"] .hero-plate { display: none; }
+[data-v="e"] .hero-copy { max-width: 820px; }
+[data-v="e"] .hero-title { font-size: clamp(60px, 8vw, 140px); }
+[data-v="e"] .hero .lead { color: #ddd3c3; }
+[data-v="e"] .hero-meta { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line); max-width: 720px; }
+[data-v="e"] .marquee { display: none; }
+
+/* bevezető (A): arany vonal a cím alatt; számok aranyban (D) */
+[data-v="e"] .intro .h2::after { content: ''; display: block; width: 72px; height: 4px; margin-top: 26px; background: var(--acc); border-radius: 2px; }
+[data-v="e"] .stats dd { color: var(--acc-text); }
+[data-v="e"] .stats small { color: var(--ink); }
+
+/* tálak (A): kerek kivágás arany gyűrűvel, a nagy tál kártyán */
+[data-v="e"] .dish:not(.dish-hero) { align-items: center; text-align: center; }
+[data-v="e"] .dish:not(.dish-hero) figure {
+  width: min(100%, 300px); aspect-ratio: 1; border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(235, 187, 92, .5), 0 0 0 12px var(--bg), 0 0 0 13px rgba(235, 187, 92, .22);
+  margin: 13px auto 28px;
+}
+[data-v="e"] .dish:not(.dish-hero) .dish-no { color: var(--muted); }
+[data-v="e"] .dish-list { row-gap: clamp(48px, 6vw, 80px); }
+[data-v="e"] .dish-hero { background: var(--surface); border-radius: 26px; padding: clamp(16px, 2vw, 24px); margin-bottom: clamp(20px, 3vw, 40px); }
+[data-v="e"] .dish-hero figure { border-radius: 18px; }
+[data-v="e"] .dish-hero .dish-txt { padding: clamp(10px, 2vw, 30px); }
+
+/* helyszínek (D): a szöveg a fotó előterében */
+[data-v="e"] .place { position: relative; min-height: 600px; justify-content: flex-end; background: #000; }
+[data-v="e"] .place figure { position: absolute; inset: 0; aspect-ratio: auto; }
+[data-v="e"] .place figure::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0, 0, 0, .94) 0%, rgba(0, 0, 0, .72) 44%, rgba(0, 0, 0, .1) 76%); }
+[data-v="e"] .place-txt { position: relative; z-index: 2; flex: 0; }
+[data-v="e"] .place-txt > p:not(.place-tag) { color: #ddd3c3; }
+
+/* Norbo (D): arany eltolt árnyék; reel-keret arany hoverre */
+[data-v="e"] .norbo { background: linear-gradient(180deg, var(--bg), #1c160d); }
+[data-v="e"] .norbo-photo { border-radius: var(--r); box-shadow: 14px 14px 0 var(--acc); }
+[data-v="e"] .reel { border: 2px solid transparent; transition: border-color .3s; }
+[data-v="e"] .reel:hover { border-color: var(--acc); }
+
+/* csapatasztal (D): kissé világosabb blokk */
+[data-v="e"] .crew { background: var(--surface); }
+[data-v="e"] .form input, [data-v="e"] .form select, [data-v="e"] .form textarea { background: #120f0c; }
+
+/* kapcsolat (A): meleg arany fény a logó mögött */
+[data-v="e"] .contact { background: radial-gradient(800px 400px at 15% 50%, rgba(217, 164, 65, .1), transparent 70%); }
+
+@media (max-width: 900px) {
+  [data-v="e"] .hero { min-height: 100svh; padding-bottom: 40px; }
+  [data-v="e"] .hero-media::after { background: linear-gradient(0deg, rgba(22, 19, 15, .97) 0%, rgba(22, 19, 15, .86) 45%, rgba(22, 19, 15, .2) 78%, rgba(22, 19, 15, .45) 100%); }
+  [data-v="e"] .hero-media img { object-position: 50% 30%; }
+  [data-v="e"] .hero-title { font-size: clamp(54px, 15vw, 96px); }
+  [data-v="e"] .place { min-height: 520px; }
+}
+
+/* tál-összerakó: meleg fény a serpenyő mögött */
+[data-v="e"] .builder { background: radial-gradient(700px 520px at 25% 50%, rgba(227, 170, 58, .12), transparent 70%), var(--bg); border-block: 1px solid var(--line); }
